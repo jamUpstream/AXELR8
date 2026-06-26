@@ -28,9 +28,6 @@ export function SystemArchitecture() {
         <h2 className="font-inter text-headline-lg-mobile font-bold uppercase md:text-headline-lg">
           System Architecture
         </h2>
-        <p className="mt-2 font-geist text-mono-data text-primary">
-          OPERATIONAL FLOW v4.0
-        </p>
       </Reveal>
 
       <div className="relative mx-auto max-w-5xl">
