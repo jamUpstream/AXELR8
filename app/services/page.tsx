@@ -22,7 +22,7 @@ export default function ServicesPage() {
       />
 
       <section className="px-margin-mobile py-section-gap md:px-margin-desktop">
-        <RevealGroup className="grid grid-cols-1 gap-gutter md:grid-cols-3">
+        <RevealGroup className="grid grid-cols-1 gap-gutter sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             const Icon = service.icon;
             return (

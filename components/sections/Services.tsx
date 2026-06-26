@@ -16,7 +16,7 @@ export function Services() {
         </p>
       </Reveal>
 
-      <RevealGroup className="grid grid-cols-1 gap-gutter md:grid-cols-3">
+      <RevealGroup className="grid grid-cols-1 gap-gutter sm:grid-cols-2 lg:grid-cols-3">
         {services.map((service) => {
           const Icon = service.icon;
           return (

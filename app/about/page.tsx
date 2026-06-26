@@ -89,11 +89,11 @@ export default function AboutPage() {
       </section>
 
       <section className="px-margin-mobile py-section-gap md:px-margin-desktop">
-        <RevealGroup className="grid grid-cols-2 gap-gutter md:grid-cols-4">
+        <RevealGroup className="grid grid-cols-2 gap-gutter lg:grid-cols-4">
           {stats.map((s) => (
             <RevealItem key={s.label}>
-              <div className="bg-surface-container-lowest p-8 text-center thin-border">
-                <p className="font-inter text-headline-lg font-bold text-primary">
+              <div className="bg-surface-container-lowest p-6 text-center thin-border sm:p-8">
+                <p className="font-inter text-4xl font-bold tracking-tight text-primary sm:text-5xl">
                   {s.value}
                 </p>
                 <p className="mt-2 font-geist text-mono-data uppercase tracking-wide text-on-surface-variant">

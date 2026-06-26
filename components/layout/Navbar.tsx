@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -17,6 +17,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -29,16 +30,38 @@ export function Navbar() {
     setOpen(false);
   }, [pathname]);
 
+  // Dismiss the mobile menu on outside click or Escape.
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <nav
+      ref={navRef}
       className={`fixed top-0 z-50 w-full border-b border-outline-variant/30 backdrop-blur-md transition-colors duration-300 ${
         scrolled ? "bg-black/80" : "bg-transparent"
       }`}
     >
-      <div className="flex items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
+      <div className="flex items-center justify-between px-margin-mobile py-4 md:px-12 lg:px-margin-desktop">
         <Link href="/" className="flex items-center" aria-label="AXLER8 home">
           <Image
             src="/logo/banner_logo.png"
@@ -46,11 +69,11 @@ export function Navbar() {
             width={220}
             height={52}
             priority
-            className="h-11 w-auto md:h-12"
+            className="h-10 w-auto sm:h-11 lg:h-12"
           />
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 lg:flex xl:gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -66,7 +89,7 @@ export function Navbar() {
           ))}
           <Link
             href="/contact"
-            className="bg-primary px-6 py-2 font-geist text-label-caps uppercase tracking-widest text-on-primary transition-all duration-100 hover:brightness-110 active:scale-95"
+            className="whitespace-nowrap bg-primary px-6 py-2 font-geist text-label-caps uppercase tracking-widest text-on-primary transition-all duration-100 hover:brightness-110 active:scale-95"
           >
             Book a Call
           </Link>
@@ -77,7 +100,7 @@ export function Navbar() {
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
           <span
             className={`h-px w-6 bg-on-surface transition-transform ${
@@ -99,7 +122,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="flex flex-col gap-1 border-t border-outline-variant/30 bg-black/95 px-margin-mobile py-4 md:hidden">
+        <div className="flex flex-col gap-1 border-t border-outline-variant/30 bg-black/95 px-margin-mobile py-4 lg:hidden">
           {navLinks.map((link) => (
             <Link
               key={link.href}

@@ -49,6 +49,60 @@ body {
   }
 }
 
+/*
+ * Responsive spacing tokens.
+ * The design tokens (section-gap 160px, margin-desktop 80px) are tuned for
+ * large desktops. Scale them down on smaller viewports so a single set of
+ * utility classes (py-section-gap, px-margin-desktop) stays correct across
+ * mobile, tablet, and desktop without touching every section component.
+ */
+@layer utilities {
+  /* Vertical section rhythm */
+  .py-section-gap {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  @media (min-width: 768px) {
+    .py-section-gap {
+      padding-top: 112px;
+      padding-bottom: 112px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .py-section-gap {
+      padding-top: 160px;
+      padding-bottom: 160px;
+    }
+  }
+
+  /* Horizontal page margins */
+  .px-margin-desktop {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  @media (min-width: 768px) {
+    .px-margin-desktop {
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .px-margin-desktop {
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+  }
+
+  /* Display headline: add an intermediate tablet step between 32px and 72px */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .md\:text-headline-display {
+      font-size: 52px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+  }
+}
+
 /* Thin scrollbar to match industrial aesthetic */
 ::-webkit-scrollbar {
   width: 8px;

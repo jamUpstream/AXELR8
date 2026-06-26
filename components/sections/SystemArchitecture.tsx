@@ -34,11 +34,11 @@ export function SystemArchitecture() {
       </Reveal>
 
       <div className="relative mx-auto max-w-5xl">
-        {/* Vertical lines */}
-        <div className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 bg-outline-variant" />
-        <div className="timeline-glow absolute left-1/2 top-0 h-1/2 w-px -translate-x-1/2 bg-primary" />
+        {/* Vertical lines (desktop alternating layout only) */}
+        <div className="absolute bottom-0 left-1/2 top-0 hidden w-px -translate-x-1/2 bg-outline-variant md:block" />
+        <div className="timeline-glow absolute left-1/2 top-0 hidden h-1/2 w-px -translate-x-1/2 bg-primary md:block" />
 
-        <div className="space-y-24 md:space-y-32">
+        <div className="space-y-gutter md:space-y-32">
           {steps.map((step, i) => {
             const last = i === steps.length - 1;
             const textBlock = (
@@ -83,7 +83,7 @@ export function SystemArchitecture() {
               >
                 {textBlock}
                 <div
-                  className={`absolute left-1/2 z-10 h-4 w-4 -translate-x-1/2 rounded-full ${
+                  className={`absolute left-1/2 z-10 hidden h-4 w-4 -translate-x-1/2 rounded-full md:block ${
                     last ? "bg-outline" : "timeline-glow bg-primary"
                   }`}
                 />
