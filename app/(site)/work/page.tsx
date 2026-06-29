@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { projects } from "@/data/projects";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { getPublishedProjects } from "@/lib/queries";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Work | AXLER8",
@@ -10,7 +12,8 @@ export const metadata: Metadata = {
     "Case studies of precision automation systems built across e-commerce, healthcare, real estate, SaaS, and professional services.",
 };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const projects = await getPublishedProjects();
   return (
     <>
       <PageHeader

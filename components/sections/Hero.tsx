@@ -4,7 +4,15 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
-export function Hero() {
+export function Hero({
+  headlineLine1,
+  headlineLine2,
+  subheadline,
+}: {
+  headlineLine1: string;
+  headlineLine2: string;
+  subheadline: string;
+}) {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20">
       {/* Background */}
@@ -26,9 +34,9 @@ export function Hero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mb-6 font-inter text-headline-lg-mobile font-bold tracking-tight md:text-headline-display"
         >
-          AUTOMATE YOUR BUSINESS.
+          {headlineLine1}
           <br />
-          <span className="text-primary">ACCELERATE YOUR SUCCESS.</span>
+          <span className="text-primary">{headlineLine2}</span>
         </motion.h1>
 
         <motion.p
@@ -37,9 +45,7 @@ export function Hero() {
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
           className="mx-auto mb-12 max-w-2xl font-body-lg text-body-lg text-on-surface-variant"
         >
-          Precision-engineered workflows designed for high-stakes scalability.
-          We remove the friction from your operations so you can focus on the
-          mission.
+          {subheadline}
         </motion.p>
 
         <motion.div

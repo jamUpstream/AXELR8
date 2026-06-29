@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
-import { services } from "@/data/services";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { SystemArchitecture } from "@/components/sections/SystemArchitecture";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { getServices } from "@/lib/queries";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Services | AXLER8",
@@ -12,7 +14,8 @@ export const metadata: Metadata = {
     "Strategy & setup, ongoing optimization, and unlimited support — automation handled end-to-end with aerospace precision.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices();
   return (
     <>
       <PageHeader

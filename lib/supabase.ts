@@ -1,24 +1,8 @@
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-
 /**
- * Supabase client — configured but NOT yet used.
- *
- * Phase 2 (see the build prompt): replace static imports from `/data/*`
- * with `supabase.from('projects').select(...)` queries in server components.
- * The `Project` type in `/types` already matches the intended table shape.
+ * Legacy entrypoint kept for import stability.
+ * Phase 2 split the client by environment:
+ *   - Server Components / route handlers → ./supabase-server
+ *   - Client Components (admin, auth, uploads) → ./supabase-browser
+ *   - Privileged server writes / seed → ./supabase-admin
  */
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-let client: SupabaseClient | null = null;
-
-export function getSupabase(): SupabaseClient | null {
-  if (!supabaseUrl || !supabaseAnonKey) {
-    // Not configured yet — static data layer is in use.
-    return null;
-  }
-  if (!client) {
-    client = createClient(supabaseUrl, supabaseAnonKey);
-  }
-  return client;
-}
+export { createClient as createBrowserClient } from "./supabase-browser";

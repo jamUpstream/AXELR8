@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,9 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.variable} ${GeistMono.variable}`}>
       <body className="font-inter text-body-md text-on-surface bg-background overflow-x-hidden">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

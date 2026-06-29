@@ -49,6 +49,47 @@ body {
   }
 }
 
+/* Rich-text editor content styling (admin email composer) */
+.prose-email {
+  color: #e3e2e2;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.prose-email p {
+  margin: 0 0 0.75em;
+}
+.prose-email p:last-child {
+  margin-bottom: 0;
+}
+.prose-email h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0.5em 0 0.4em;
+}
+.prose-email ul,
+.prose-email ol {
+  margin: 0 0 0.75em;
+  padding-left: 1.4em;
+}
+.prose-email ul {
+  list-style: disc;
+}
+.prose-email ol {
+  list-style: decimal;
+}
+.prose-email a {
+  color: #a3c9ff;
+  text-decoration: underline;
+}
+.prose-email:empty::before,
+.prose-email > p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: rgba(138, 145, 159, 0.5);
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
 /*
  * Responsive spacing tokens.
  * The design tokens (section-gap 160px, margin-desktop 80px) are tuned for

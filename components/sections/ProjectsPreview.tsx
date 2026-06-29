@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { projects } from "@/data/projects";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { EyebrowLabel } from "@/components/ui/Pill";
+import type { Project } from "@/types";
 
-export function ProjectsPreview() {
+export function ProjectsPreview({ projects }: { projects: Project[] }) {
   const featured = projects.slice(0, 5);
 
   return (

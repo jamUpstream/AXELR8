@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProjectBySlug, getAllProjectSlugs } from "@/data/projects";
 import { ProjectDetail } from "@/components/projects/ProjectDetail";
+import {
+  getProjectBySlug,
+  getPublishedProjectSlugs,
+} from "@/lib/queries";
 
-export function generateStaticParams() {
-  return getAllProjectSlugs().map((slug) => ({ slug }));
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const slugs = await getPublishedProjectSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
-}): Metadata {
-  const project = getProjectBySlug(params.slug);
+}): Promise<Metadata> {
+  const project = await getProjectBySlug(params.slug);
   if (!project) return { title: "Project Not Found | AXLER8" };
   return {
     title: `${project.title} | AXLER8`,
@@ -20,17 +26,17 @@ export function generateMetadata({
     openGraph: {
       title: `${project.title} | AXLER8`,
       description: project.summary,
-      images: [project.coverImage],
+      images: project.coverImage ? [project.coverImage] : [],
     },
   };
 }
 
-export default function ProjectPage({
+export default async function ProjectPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const project = getProjectBySlug(params.slug);
+  const project = await getProjectBySlug(params.slug);
   if (!project) notFound();
   return <ProjectDetail project={project} />;
 }

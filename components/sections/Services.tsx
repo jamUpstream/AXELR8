@@ -1,18 +1,25 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { services } from "@/data/services";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import type { Service } from "@/types";
 
-export function Services() {
+export function Services({
+  services,
+  eyebrow,
+  subheadline,
+}: {
+  services: Service[];
+  eyebrow: string;
+  subheadline: string;
+}) {
   return (
     <section className="px-margin-mobile py-section-gap md:px-margin-desktop">
       <Reveal className="mb-20 text-center">
         <h2 className="mb-4 font-inter text-headline-lg-mobile font-bold uppercase md:text-headline-lg">
-          Automation—Handled End-to-End.
+          {eyebrow}
         </h2>
         <p className="mx-auto max-w-2xl text-on-surface-variant">
-          Our modular service suite provides everything your operation needs to
-          achieve orbital velocity.
+          {subheadline}
         </p>
       </Reveal>
 

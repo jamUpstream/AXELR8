@@ -4,6 +4,9 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { Reveal } from "@/components/ui/Reveal";
 import { EyebrowLabel } from "@/components/ui/Pill";
+import { getServices } from "@/lib/queries";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Contact | AXLER8",
@@ -17,7 +20,13 @@ const details = [
   { icon: MapPin, label: "Operating", value: "Remote · Global" },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const services = await getServices();
+  const serviceOptions = services.map((s) => ({
+    slug: s.slug,
+    title: s.title,
+  }));
+
   return (
     <>
       <PageHeader
@@ -51,7 +60,7 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <ContactForm />
+            <ContactForm services={serviceOptions} />
           </Reveal>
         </div>
       </section>
